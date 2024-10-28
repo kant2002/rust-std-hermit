@@ -53,7 +53,7 @@ jobs:
           ref: ${{ env.RUSTUP_TOOLCHAIN }}
           path: rust
       - name: Build rust-std distribution artifacts
-        run: ./x.ps1 dist --config ../rust-config-win.toml rust-std
+        run: ./x.ps1 dist -v --config ../rust-config-win.toml rust-std
         working-directory: ./rust
         env:
           CC_x86_64_unknown_hermit: cl
