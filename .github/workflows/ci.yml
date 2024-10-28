@@ -54,7 +54,8 @@ jobs:
           path: rust
       - name: setup devcmd
         uses: ilammy/msvc-dev-cmd@v1.3.0
-        vs-version: 17.0
+        with:
+          vsversion: 17.0
       - name: Build rust-std distribution artifacts
         run: ./x.ps1 dist -v --config ../rust-config-win.toml rust-std
         working-directory: ./rust
