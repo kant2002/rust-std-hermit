@@ -60,7 +60,7 @@ jobs:
         run: ./x.ps1 dist -v --config ../rust-config-win.toml rust-std
         working-directory: ./rust
         env:
-          CC_x86_64_unknown_hermit: cl
+          CC_x86_64_unknown_hermit: clang-cl
       #- name: Create distribution artifacts
       #  run: |
       #    ./dist.sh ${{ env.RUSTUP_TOOLCHAIN }} x86_64-unknown-hermit
