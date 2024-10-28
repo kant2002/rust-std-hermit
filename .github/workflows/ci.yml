@@ -43,7 +43,7 @@ jobs:
       #- run: gh release create ${{ env.RUSTUP_TOOLCHAIN }} --title ${{ env.RUSTUP_TOOLCHAIN }} rust/build/dist/*.tar.gz
   dist-win:
     name: Build rust-std-hermit distribution artifacts
-    runs-on: windows-latest
+    runs-on: windows-2022
     steps:
       - uses: actions/checkout@v4
       - name: Checkout rust
