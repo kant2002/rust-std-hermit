@@ -13,6 +13,7 @@ jobs:
   dist:
     name: Build rust-std-hermit distribution artifacts
     runs-on: ubuntu-latest
+    if: false
     steps:
       - uses: actions/checkout@v4
       - name: Checkout rust
@@ -38,4 +39,24 @@ jobs:
           ./dist.sh ${{ env.RUSTUP_TOOLCHAIN }} aarch64-unknown-hermit
           ./dist.sh ${{ env.RUSTUP_TOOLCHAIN }} riscv64gc-unknown-hermit
           ./dist.sh ${{ env.RUSTUP_TOOLCHAIN }} x86_64-unknown-hermit
-      - run: gh release create ${{ env.RUSTUP_TOOLCHAIN }} --title ${{ env.RUSTUP_TOOLCHAIN }} rust/build/dist/*.tar.gz
+      #- run: gh release create ${{ env.RUSTUP_TOOLCHAIN }} --title ${{ env.RUSTUP_TOOLCHAIN }} rust/build/dist/*.tar.gz
+  dist-win:
+    name: Build rust-std-hermit distribution artifacts
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Checkout rust
+        uses: actions/checkout@v4
+        with:
+          repository: rust-lang/rust
+          ref: ${{ env.RUSTUP_TOOLCHAIN }}
+          path: rust
+      - name: Build rust-std distribution artifacts
+        run: ./x.ps1 dist --config ../rust-config.toml rust-std
+        working-directory: ./rust
+        env:
+          CC_x86_64_unknown_hermit: cl
+      #- name: Create distribution artifacts
+      #  run: |
+      #    ./dist.sh ${{ env.RUSTUP_TOOLCHAIN }} x86_64-unknown-hermit
+      #- run: gh release create ${{ env.RUSTUP_TOOLCHAIN }} --title ${{ env.RUSTUP_TOOLCHAIN }} rust/build/dist/*.tar.gz
